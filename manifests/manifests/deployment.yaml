@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: gohttp
-          image: skadacrv2.azurecr.io/samples/contoso-website:latest
+          image: skadacrv3.azurecr.io/samples/contoso-website:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
