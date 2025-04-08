@@ -39,10 +39,10 @@ on:
 
 env:
   ACR_RESOURCE_GROUP: sumin-rg
-  AZURE_CONTAINER_REGISTRY: skadacrv3
+  AZURE_CONTAINER_REGISTRY: skadacrv2
   CONTAINER_NAME: samples/contoso-website
-  CLUSTER_NAME: skhubfulregion
-  CLUSTER_RESOURCE_GROUP: sumin-rg
+  CLUSTER_NAME: ca-fleet1
+  CLUSTER_RESOURCE_GROUP: ca-fleet1-rg
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/fleets
   DEPLOYMENT_MANIFEST_PATH: |
     manifests/manifests/configmap.yaml
