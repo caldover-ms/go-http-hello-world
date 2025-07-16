@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: devhubtest
-  namespace: default
+  name: timeout-workflow
+  namespace: sample-app-namespace-1752694887375
   labels:
-    app.kubernetes.io/name: devhubtest
+    app.kubernetes.io/name: timeout-workflow
     kubernetes.azure.com/generator: devhub
 spec:
   type: LoadBalancer
   selector:
-    app.kubernetes.io/name: devhubtest
+    app.kubernetes.io/name: timeout-workflow
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 3000
+      targetPort: 3000

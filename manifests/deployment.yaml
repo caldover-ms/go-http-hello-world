@@ -1,46 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devhubtest
+  name: timeout-workflow
   labels:
-    app.kubernetes.io/name: devhubtest
+    app.kubernetes.io/name: timeout-workflow
     kubernetes.azure.com/generator: devhub
-  namespace: default
+  namespace: sample-app-namespace-1752694887375
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: devhubtest
+      app.kubernetes.io/name: timeout-workflow
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: devhubtest
+        app.kubernetes.io/name: timeout-workflow
     spec:
       containers:
-        - name: devhubtest
-          image: go-http-hello-world:latest
+        - name: timeout-workflow
+          image: registry1752695422346.azurecr.io/image-workflow-1752694887362:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           resources:
             requests:
-              cpu: "1"
-              memory: "1Gi"
+              cpu: "0.5"
+              memory: "0.5Gi"
             limits:
               cpu: "1"
               memory: "1Gi"
           envFrom:
             - configMapRef:
-                name: devhubtest-config
+                name: timeout-workflow-config
             - secretRef:
                 name: secret-ref
                 optional: true
           livenessProbe:
             tcpSocket:
-              port: 8080
+              port: 3000
           readinessProbe:
             tcpSocket:
-              port: 8080
+              port: 3000
             periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 1
@@ -48,12 +48,12 @@ spec:
             initialDelaySeconds: 3
           startupProbe:
             tcpSocket:
-              port: 8080
-            periodSeconds: 1
-            timeoutSeconds: 3
-            failureThreshold: 1
+              port: 3000
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
             successThreshold: 1
-            initialDelaySeconds: 5
+            initialDelaySeconds: 0
           securityContext:
             seccompProfile:
               type: RuntimeDefault
@@ -83,11 +83,11 @@ spec:
               topologyKey: kubernetes.io/hostname
               labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: devhubtest
+                  app.kubernetes.io/name: timeout-workflow
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
-              app.kubernetes.io/name: devhubtest
+              app.kubernetes.io/name: timeout-workflow

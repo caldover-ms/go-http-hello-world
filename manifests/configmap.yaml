@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: devhubtest-config
-  namespace: default
+  name: timeout-workflow-config
+  namespace: sample-app-namespace-1752694887375
   labels:
-    app.kubernetes.io/name: devhubtest
+    app.kubernetes.io/name: timeout-workflow
     kubernetes.azure.com/generator: devhub
 data:
